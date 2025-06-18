@@ -1,0 +1,46 @@
+
+services:
+  backend:
+    build: .  # Build depuis la racine
+    container_name: signage-backend
+    volumes:
+      - ./data/media:/app/media
+    env_file:
+      - .env  # 🔧 Charge automatiquement toutes les variables du fichier .env
+    environment:
+      # Variables spécifiques au conteneur (surchargeront celles du .env si redéfinies)
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/signage_db
+      - SERVE_FRONTEND=true
+    ports:
+      - "3040:8000"  # Seul port exposé
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - signage-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:14
+    container_name: signage-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: signage_db
+    volumes:
+      - signage_db_data:/var/lib/postgresql/data
+    networks:
+      - signage-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  signage_db_data:
+
+networks:
+  signage-network:
+    driver: bridge

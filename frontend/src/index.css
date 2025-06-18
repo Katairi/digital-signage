@@ -1,0 +1,243 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables CSS pour les toasts et tooltips en mode sombre */
+:root {
+  --toast-bg: #ffffff;
+  --toast-color: #374151;
+  --toast-border: #e5e7eb;
+  --tooltip-bg: #ffffff;
+  --tooltip-color: #374151;
+  --tooltip-border: #e5e7eb;
+}
+
+.dark {
+  --toast-bg: #374151;
+  --toast-color: #f9fafb;
+  --toast-border: #4b5563;
+  --tooltip-bg: #374151;
+  --tooltip-color: #f9fafb;
+  --tooltip-border: #4b5563;
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Transitions globales pour le mode sombre */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Styles pour les focus rings en mode sombre */
+.dark .focus\:ring-primary-500:focus {
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+}
+
+/* Amélioration des contrastes en mode sombre */
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+  @apply ring-2 ring-primary-500 border-transparent;
+}
+
+/* Animation pour les changements de thème */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Styles pour les éléments de densité */
+body {
+  font-size: var(--text-base, 1rem);
+}
+
+/* Amélioration de la lisibilité */
+.dark {
+  color-scheme: dark;
+}
+
+/* Gestion des images en mode sombre */
+.dark img {
+  opacity: 0.9;
+}
+
+.dark img:hover {
+  opacity: 1;
+}
+
+/* Styles pour les tooltips en mode sombre */
+.dark .tooltip {
+  @apply bg-gray-800 text-gray-200 border-gray-700;
+}
+
+/* Amélioration des ombres en mode sombre */
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+}
+
+.dark .shadow {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+}
+
+.dark .shadow-lg {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}
+
+.dark .shadow-xl {
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.4), 0 10px 10px -5px rgb(0 0 0 / 0.3);
+}
+
+/* Animation d'apparition pour les éléments */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Styles pour les états de chargement */
+.loading-skeleton {
+  @apply bg-gray-200 dark:bg-gray-700 animate-pulse rounded;
+}
+
+/* Styles pour les badges en mode sombre */
+.dark .badge-primary {
+  @apply bg-primary-900 text-primary-200;
+}
+
+.dark .badge-success {
+  @apply bg-green-900 text-green-200;
+}
+
+.dark .badge-warning {
+  @apply bg-yellow-900 text-yellow-200;
+}
+
+.dark .badge-error {
+  @apply bg-red-900 text-red-200;
+}
+
+/* Styles pour les graphiques en mode sombre */
+.dark .recharts-cartesian-grid-horizontal line,
+.dark .recharts-cartesian-grid-vertical line {
+  stroke: #4b5563;
+}
+
+.dark .recharts-text {
+  fill: #9ca3af;
+}
+
+/* Amélioration des contrastes pour les liens */
+.dark a {
+  color: #60a5fa;
+}
+
+.dark a:hover {
+  color: #93c5fd;
+}
+
+/* Styles pour les modals en mode sombre */
+.dark .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Styles pour les dropdown menus */
+.dark .dropdown-menu {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark .dropdown-item:hover {
+  @apply bg-gray-700;
+}
+
+/* Styles pour les tables en mode sombre */
+.dark table {
+  @apply bg-gray-800;
+}
+
+.dark thead {
+  @apply bg-gray-900;
+}
+
+.dark tbody tr:hover {
+  @apply bg-gray-700;
+}
+
+.dark th {
+  @apply text-gray-300 border-gray-700;
+}
+
+.dark td {
+  @apply text-gray-200 border-gray-700;
+}
+
+/* Amélioration des formulaires en mode sombre */
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #6b7280;
+}
+
+/* Fix pour les selects - éviter les flèches multiples */
+select {
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Style personnalisé pour les selects en mode sombre */
+.dark select {
+  background-image: none;
+}
+
+/* Animation pour les switchs/toggles */
+.toggle-switch {
+  transition: background-color 0.3s ease;
+}
+
+.toggle-switch:checked {
+  background-color: #3b82f6;
+}
+
+/* Amélioration des codes d'erreur et messages */
+.dark .error-message {
+  @apply bg-red-900/20 text-red-300 border-red-800;
+}
+
+.dark .success-message {
+  @apply bg-green-900/20 text-green-300 border-green-800;
+}
+
+.dark .warning-message {
+  @apply bg-yellow-900/20 text-yellow-300 border-yellow-800;
+}
+
+.dark .info-message {
+  @apply bg-blue-900/20 text-blue-300 border-blue-800;
+}
